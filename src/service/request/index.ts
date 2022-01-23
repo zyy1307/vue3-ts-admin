@@ -65,7 +65,7 @@ class YYRequest {
       }
     );
   }
-  request<T>(config: YYRequestConfig<T>): Promise<T> {
+  request<T = any>(config: YYRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       if (config.interceptors?.requestInterceptor) {
         //如果有拦截器，就执行以下，反正返回的还是config所以ok
@@ -91,11 +91,17 @@ class YYRequest {
         });
     });
   }
-  get<T>(config: YYRequestConfig<T>): Promise<T> {
+  get<T = any>(config: YYRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'GET' });
   }
-  post<T>(config: YYRequestConfig<T>): Promise<T> {
+  post<T = any>(config: YYRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'POST' });
+  }
+  delete<T = any>(config: YYRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'DELETE' });
+  }
+  patch<T = any>(config: YYRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'PATCH' });
   }
 }
 export default YYRequest;

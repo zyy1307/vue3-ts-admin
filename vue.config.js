@@ -5,6 +5,7 @@ const Components = require('unplugin-vue-components/webpack');
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers');
 module.exports = {
   //publicPath:'./',
+
   configureWebpack: {
     //1、对象形式
     resolve: {

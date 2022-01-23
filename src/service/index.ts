@@ -1,4 +1,5 @@
 //service统一出口
+import cache from '@/utils/cache';
 import YYRequest from './request';
 import { BASE_URL, TIME_OUT } from './request/config';
 const yyRequest = new YYRequest({
@@ -6,7 +7,11 @@ const yyRequest = new YYRequest({
   timeout: TIME_OUT,
   interceptors: {
     requestInterceptor: (config) => {
-      console.log(config);
+      const token = cache.getCache('token') ?? '';
+      if (token) {
+        //header不可能为空！
+        config.headers!.Authorization = `Bearer ${token}`;
+      }
       return config;
     }
   }
